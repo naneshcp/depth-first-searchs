@@ -54,7 +54,37 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
 
-<hr>
+
+```
+program:
+
+from collections import deque
+from collections import defaultdict
+
+
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+    for neighbour in graph[start]:
+        if visited[neighbour] == False:
+            dfs(graph, neighbour, visited, path)
+            visited[neighbour] = True
+    return path
+
+graph = defaultdict(list)
+n, e = map(int, input().split())
+for i in range(e):
+    u, v = map(str, input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+# print(graph)
+start = "A"
+visited = defaultdict(bool)
+path = []
+traversedpath = dfs(graph, start, visited, path)
+print(traversedpath)
+```
+
 <h3>Sample Input</h3>
 <hr>
 8 9 <BR>
@@ -69,6 +99,8 @@ G F <BR>
 F H <BR>
 <hr>
 <h3>Sample Output</h3>
+<img width="866" height="479" alt="Screenshot 2025-08-25 221834" src="https://github.com/user-attachments/assets/d36695fa-a343-4ec3-8954-48391046b5dc" />
+
 <hr>
 ['A', 'B', 'E', 'D', 'C', 'G', 'F', 'H']
 
@@ -85,6 +117,8 @@ F H <BR>
 2 4 <BR>
 <hr>
 <h3>Sample Output</h3>
+<img width="478" height="165" alt="image" src="https://github.com/user-attachments/assets/0f974c23-45ff-480e-8c3f-44297e0417d8" />
+
 <hr>
 ['0', '1', '2', '3', '4']
 
